@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'HellowWorld'
+  name: 'Hello'
 }
 </script>
 
