@@ -1,15 +1,14 @@
 <template>
-  <div class="panel panel-default">
-      <h1> Hello World </h1>
-  </div>
+    <h1>{{ msg }}</h1>
 </template>
 
 <script>
 export default {
-  name: 'HellowWorld'
+  props: {
+    msg: String
+  }
 }
 </script>
-
 
 <style scoped>
 

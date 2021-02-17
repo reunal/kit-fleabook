@@ -1,15 +1,11 @@
 <template>
-  <div class="panel panel-default">
-      <h1> Hello World </h1>
-  </div>
+    <h1> 404 NO PAGE FOUND </h1>
 </template>
 
 <script>
 export default {
-  name: 'HellowWorld'
 }
 </script>
-
 
 <style scoped>
 
