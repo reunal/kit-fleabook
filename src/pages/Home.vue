@@ -1,15 +1,19 @@
 <template>
-    <div>
-        home
-    </div>
+  <v-container>
+    <v-text-field
+      solo
+      label="Search"
+      clearable
+    ></v-text-field>
+  </v-container>
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {};
 </script>
 
 <style lang="scss" scoped>
-
+div {
+  margin-top: 1rem;
+}
 </style>
