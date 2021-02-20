@@ -1,19 +1,22 @@
 <template>
   <v-container>
-    <v-text-field
-      solo
-      label="Search"
-      clearable
-    ></v-text-field>
+    <book-input v-model="text"/>
+    <empty/>
+    <book-list v-model="text"/>
   </v-container>
 </template>
 
 <script>
-export default {};
+import Empty from '../components/Empty.vue';
+import BookInput from "../components/home/BookInput.vue";
+import BookList from '../components/home/BookList.vue';
+export default {
+  data: () => ({
+      text: ""
+  }),
+  components: { BookInput, BookList, Empty,  },
+};
 </script>
 
 <style lang="scss" scoped>
-div {
-  margin-top: 1rem;
-}
 </style>

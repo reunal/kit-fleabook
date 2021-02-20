@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <StdInput v-model="stdId"/>
-    <ReserveList v-model="stdId"/>
+    <std-input v-model="stdId"/>
+    <reserve-list v-model="stdId"/>
   </v-container>
 </template>
 
