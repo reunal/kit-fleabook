@@ -8,6 +8,6 @@ export default {};
 
 <style lang="scss" scoped>
 div {
-    margin-top: 90px;
+    margin-top: 60px;
 }
 </style>

@@ -5,16 +5,15 @@
         <v-list-item-title class="headline mb-1">
           {{ title }}
         </v-list-item-title>
-        <v-list-item-subtitle
-          >{{ publisher }}. {{ auther }}.</v-list-item-subtitle
-        >
+        <v-list-item-subtitle>
+          {{ publisher }}. {{ auther }}.
+        </v-list-item-subtitle>
 
-        <v-list-item-content>
-          <v-list-item-subtitle
-            >총 {{ stockCount }}권 중 {{ stockCount - reservationCount }}권 예약
-            가능</v-list-item-subtitle
-          >
-        </v-list-item-content>
+          <v-list-item-subtitle class="state">
+            총 {{ stockCount }}권 중 
+            <span>{{ stockCount - reservationCount }}권</span> 예약가능
+          </v-list-item-subtitle>
+
       </v-list-item-content>
     </v-list-item>
   </v-card>
@@ -43,6 +42,12 @@ export default {
   &:hover {
     transition-property: all;
     background-color: rgba(0, 0, 0, 0.01);
+  }
+}
+.state{
+  margin: 6px 0 6px 0;
+  & > span {
+    font-weight: 600;
   }
 }
 </style>
