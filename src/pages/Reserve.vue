@@ -1,17 +1,17 @@
 <template>
   <v-container>
-    <std-input v-model="stdId"/>
-    <reserve-list v-model="stdId"/>
+    <std-input />
+    <reserve-list />
   </v-container>
 </template>
 
 <script>
 import StdInput from "@/components/reserve/StdInput";
-import ReserveList from '@/components/reserve/ReserveList.vue';
+import ReserveList from "@/components/reserve/ReserveList.vue";
 
 export default {
   data: () => ({
-      stdId: ""
+    list: [],
   }),
   components: { StdInput, ReserveList },
 };

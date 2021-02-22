@@ -7,6 +7,7 @@
       single-line
       outlined
       clearable
+      @click:clear="onClear"
       prepend-inner-icon="mdi-account"
       append-outer-icon="mdi-magnify"
       @click:append-outer="onSearch()"
@@ -17,15 +18,20 @@
 
 <script>
 export default {
-  model: {
-    event: "eventData",
-  },
   data: () => ({
     stdId: "",
   }),
+  created() {
+    this.stdId = sessionStorage.getItem("stdId");
+  },
   methods: {
-    onSearch() {
-      this.$emit("eventData", this.stdId);
+    onClear() {
+      this.stdId = "";
+      sessionStorage.removeItem("stdId");
+    },
+    async onSearch() {
+      sessionStorage.setItem("stdId", this.stdId);
+      this.$router.push({ path: "reserve", query: { id: this.stdId } });
     },
   },
 };

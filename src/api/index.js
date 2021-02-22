@@ -5,4 +5,8 @@ const getBooks = () => {
   return axios.get(`${ip}/books`)
 }
 
-export {getBooks}
+const searchReserve = (stdId) => {
+  return axios.get(`${ip}/books/${stdId}/홍길동/reservations`)
+}
+
+export {getBooks, searchReserve}
