@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-text-field
-      label="책 제목"
+      label="도서 제목"
       v-model="text"
       solo
       clearable

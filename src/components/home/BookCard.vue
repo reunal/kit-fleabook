@@ -1,13 +1,12 @@
 <template>
-  <v-card class="mx-auto" max-width="700" outlined>
+  <v-card outlined @click="onClick">
     <v-list-item three-line>
-      <v-list-item-avatar tile size="100" color="grey"></v-list-item-avatar>
       <v-list-item-content>
-        <v-list-item-title class="headline mb-1"> 책 이름 </v-list-item-title>
-        <v-list-item-subtitle>책 출반사. 책 저자</v-list-item-subtitle>
+        <v-list-item-title class="headline mb-1"> {{title}} </v-list-item-title>
+        <v-list-item-subtitle>{{publisher}}. {{auther}}.</v-list-item-subtitle>
 
         <v-list-item-content>
-          <v-list-item-subtitle>총 {{5}}권 중 {{3}}권 예약 가능</v-list-item-subtitle>
+          <v-list-item-subtitle>총 {{stockCount}}권 중 {{stockCount-reservationCount}}권 예약 가능</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item-content>
     </v-list-item>
@@ -15,8 +14,26 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ['book'],
+  data() {
+    return this.book;
+  },
+  methods: {
+    onClick() {
+      this.$router.push({path: 'detail', params: {book: this.book}})
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
+.v-card{
+  margin: auto;
+  max-width: 700px;
+  cursor: pointer;
+  &:hover {
+     background-color: rgba(0, 0, 0, 0.01);
+  }
+}
 </style>
