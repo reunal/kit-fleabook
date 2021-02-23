@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <div class="text">{{ text }}</div>
-    <div v-for="(i) in [1,2,3,4]" :key="i">
-      <v-skeleton-loader v-if="loading" class="mx-auto" max-width="700" type="article" />
+    <div v-for="(i) in [1,2,3,4,5]" :key="i">
+      <v-skeleton-loader v-if="loading" class="skeleton" tile type="card-heading, list-item-two-line" />
     </div>
     <div v-for="(book) in bookList" :key="book.id">
       <book-card :book="book" />
@@ -27,8 +27,8 @@ export default {
   async created() {
     this.loading = true;
     const { data } = await getBooks();
-    this.loading = false;
     this.bookList = data;
+    this.loading = false;
   },
 };
 </script>
@@ -36,5 +36,16 @@ export default {
 <style lang="scss" scoped>
 .text {
   text-align: center;
+}
+.skeleton{
+  max-width: 700px;
+  margin: auto;
+  border: 1px solid rgba(0,0,0,0.1);
+  & > :first-child {
+    height: 40px;
+  }
+  & > :last-child {
+    height: 64px;
+  }
 }
 </style>
