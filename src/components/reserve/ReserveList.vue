@@ -1,31 +1,53 @@
 <template>
   <v-container>
-    <div v-for="(item, idx) in list" v-bind:key="idx">
-      <reserve-card v-bind:item="item"/>
-    </div>
+      <div v-if="loading" class="progress">
+        <v-progress-circular
+          color="primary"
+          :size="70"
+          :width="7"
+          indeterminate
+        ></v-progress-circular>
+      </div>
+
+    <transition name="fade" >
+      <div v-for="(item, idx) in list" :key="idx">
+        <reserve-card v-if="!loading" :item="item"/>
+      </div>
+    </transition>
   </v-container>
 </template>
 
 <script>
-import ReserveCard from './ReserveCard.vue';
-import {searchReserve} from "@/api/index"
+import ReserveCard from "./ReserveCard.vue";
+import { searchReserve } from "@/api/index";
 
 export default {
   components: { ReserveCard },
   data: () => ({
-    list: []
+    list: [],
+    loading: false,
   }),
   async created() {
     const { id } = this.$route.query;
     const stdId = sessionStorage.getItem("stdId");
     if (id || stdId) {
+      this.loading = true;
       const { data } = await searchReserve(id ? id : stdId);
       this.list = data;
+      this.loading = false;
     }
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
+.progress {
+  text-align: center;
+}
+.fade-enter-active{
+  transition: opacity 0.5s;
+}
+.fade-enter{
+  opacity: 0;
+}
 </style>
