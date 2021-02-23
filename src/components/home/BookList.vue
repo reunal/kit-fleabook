@@ -1,12 +1,21 @@
 <template>
   <v-container>
     <div class="text">{{ text }}</div>
-    <div v-for="(i) in [1,2,3,4,5]" :key="i">
-      <v-skeleton-loader v-if="loading" class="skeleton" tile type="card-heading, list-item-two-line" />
+
+    <div v-for="i in [1, 2, 3, 4, 5, 6, 7]" :key="i">
+      <v-skeleton-loader
+        v-if="loading"
+        class="skeleton"
+        tile
+        type="card-heading, list-item-two-line"
+      />
     </div>
-    <div v-for="(book) in bookList" :key="book.id">
-      <book-card :book="book" />
-    </div>
+
+    <transition-group name="fade">
+      <div v-for="book in bookList" :key="book.id">
+        <book-card :book="book" />
+      </div>
+    </transition-group>
   </v-container>
 </template>
 
@@ -37,15 +46,22 @@ export default {
 .text {
   text-align: center;
 }
-.skeleton{
+.skeleton {
   max-width: 700px;
   margin: auto;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   & > :first-child {
     height: 40px;
   }
   & > :last-child {
     height: 64px;
   }
+}
+
+.fade-enter-active {
+  transition: opacity 0.5s;
+}
+.fade-enter {
+  opacity: 0;
 }
 </style>

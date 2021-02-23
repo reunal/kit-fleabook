@@ -1,19 +1,19 @@
 <template>
   <v-container>
-      <div v-if="loading" class="progress">
-        <v-progress-circular
-          color="primary"
-          :size="70"
-          :width="7"
-          indeterminate
-        ></v-progress-circular>
-      </div>
+    <div v-if="loading" class="progress">
+      <v-progress-circular
+        color="primary"
+        :size="70"
+        :width="7"
+        indeterminate
+      ></v-progress-circular>
+    </div>
 
-    <transition name="fade" >
+    <transition-group name="fade">
       <div v-for="(item, idx) in list" :key="idx">
-        <reserve-card v-if="!loading" :item="item"/>
+        <reserve-card v-if="!loading" :item="item" />
       </div>
-    </transition>
+    </transition-group>
   </v-container>
 </template>
 
@@ -44,10 +44,10 @@ export default {
 .progress {
   text-align: center;
 }
-.fade-enter-active{
+.fade-enter-active {
   transition: opacity 0.5s;
 }
-.fade-enter{
+.fade-enter {
   opacity: 0;
 }
 </style>
