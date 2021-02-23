@@ -11,7 +11,7 @@
 
           <v-list-item-subtitle class="state">
             총 {{ stockCount }}권 중 
-            <span>{{ stockCount - reservationCount }}권</span> 예약가능
+            {{ stockCount - reservationCount }}권 예약가능
           </v-list-item-subtitle>
 
       </v-list-item-content>
@@ -46,8 +46,5 @@ export default {
 }
 .state{
   margin: 6px 0 6px 0;
-  & > span {
-    font-weight: 600;
-  }
 }
 </style>
