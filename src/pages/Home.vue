@@ -14,6 +14,10 @@ export default {
   data: () => ({
       text: ""
   }),
+  created() {
+    const search = sessionStorage.getItem('search');
+    if(search) this.text = search;
+  },
   components: { BookInput, BookList, Empty,  },
 };
 </script>

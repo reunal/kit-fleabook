@@ -2,7 +2,7 @@
   <v-container>
     <v-text-field
       label="도서 제목"
-      v-model="text"
+      v-model="search"
       solo
       clearable
       prepend-inner-icon="mdi-cog"
@@ -10,6 +10,7 @@
       @click:prepend-inner="onSearch()"
       @click:append="onSearch()"
       @keyup.enter="onSearch()"
+      @click:clear="onClear"
     ></v-text-field>
   </v-container>
 </template>
@@ -17,15 +18,22 @@
 <script>
 export default {
   model: {
+    prop: "text",
     event: "eventData",
   },
+  props: ["text"],
   data: () => ({
-    text: "",
+    search: "text"
   }),
   methods: {
     onSearch() {
-      this.$emit("eventData", this.text);
+      sessionStorage.setItem('search', this.search);
+      this.$emit("eventData", this.search);
     },
+    onClear() {
+      this.search = "";
+      sessionStorage.removeItem('search');
+    }
   },
 };
 </script>
