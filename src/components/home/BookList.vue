@@ -32,7 +32,8 @@ export default {
   props: ["text"],
   data: () => ({
     bookList: [],
-    startIdx: 0,
+    lastName: "",
+    searchEnd: false,
     loading: false,
     reachBottom: false,
   }),
@@ -49,17 +50,17 @@ export default {
       return bottomOfPage || scrollHeight < clientHeight;
     },
     async addBooks() {
-      // 서버로부터 받은 데이터가 10개 미만이면
-      if (this.startIdx > 15) return;
+      if (this.searchEnd) return;
 
       this.loading = true;
 
-      const { data } = await getBooks();
+      const { data } = await getBooks({text: this.text, len: SEARCH_CNT});
+      console.log(data)
       this.bookList = [...this.bookList, ...data];
-      this.startIdx += SEARCH_CNT;
       // if(this.bottomVisible())
       //   this.addArr();
 
+      this.searchEnd = data.length < SEARCH_CNT;
       this.loading = false;
     },
   },
@@ -69,6 +70,9 @@ export default {
     },
     text(text) {
       console.log(text);
+      this.bookList = [];
+      this.searchEnd = false;
+      this.addBooks();
     },
   },
 };
