@@ -21,7 +21,6 @@
 <script>
 import { getBooks } from "@/api/index";
 import BookCard from "./BookCard.vue";
-import tmpBooks from "../../assets/tmpBooks";
 
 const SEARCH_CNT = 5;
 
@@ -32,7 +31,7 @@ export default {
   },
   props: ["text"],
   data: () => ({
-    bookList: tmpBooks,
+    bookList: [],
     startIdx: 0,
     loading: false,
     reachBottom: false,

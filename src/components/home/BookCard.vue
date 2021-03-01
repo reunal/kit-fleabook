@@ -6,7 +6,7 @@
           {{ title }}
         </v-list-item-title>
         <v-list-item-subtitle>
-          {{ publisher }}. {{ auther }}.
+          {{ publisher }}. {{ author }}.
         </v-list-item-subtitle>
 
           <v-list-item-subtitle class="state">
