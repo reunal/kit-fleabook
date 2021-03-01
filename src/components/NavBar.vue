@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app color="white" flat>
     <v-tabs centered color="grey darken-1">
-      <v-tab color="#0D47A1" to="/about" dark> 금오공대</v-tab>
+      <v-tab to="/about" dark> 금오공대</v-tab>
       <v-tab to="/">책 보기</v-tab>
       <v-tab to="/reserve">예약조회</v-tab>
     </v-tabs>

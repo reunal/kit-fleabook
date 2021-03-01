@@ -10,7 +10,7 @@
       @click:prepend-inner="onSearch()"
       @click:append="onSearch()"
       @keyup.enter="onSearch()"
-      @click:clear="onClear"
+      @click:clear="onClear()"
     ></v-text-field>
   </v-container>
 </template>
@@ -23,17 +23,20 @@ export default {
   },
   props: ["text"],
   data: () => ({
-    search: "text"
+    search: "",
   }),
+  created() {
+    this.search = this.text;
+  },
   methods: {
     onSearch() {
-      sessionStorage.setItem('search', this.search);
+      sessionStorage.setItem("search", this.search);
       this.$emit("eventData", this.search);
     },
     onClear() {
       this.search = "";
-      sessionStorage.removeItem('search');
-    }
+      sessionStorage.removeItem("search");
+    },
   },
 };
 </script>
@@ -43,7 +46,7 @@ export default {
   position: fixed;
   padding: 0 20px 0 0;
   z-index: 1000;
-  & > .v-input{
+  & > .v-input {
     max-width: 500px;
     margin: auto;
   }
