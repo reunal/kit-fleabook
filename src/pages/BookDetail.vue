@@ -121,7 +121,7 @@
   
 <script>
 //라이브러리 추가
-import axios from "axios";
+import { addBookRsv, getBookStock, getBookRsv } from "../api/index";
 import StockList from "../components/detail/StockList.vue";
 import DatePicker from "../components/DatePicker.vue";
 import TimePicker from "../components/TimePicker.vue";
@@ -208,17 +208,7 @@ export default {
           time: timestamp,
           date: timestamp,
         };
-        let urlBody =
-          "https://us-central1-kit-fleamarket.cloudfunctions.net/books/" +
-          this.bookId +
-          "/reservations";
-        let config = {
-          method: "post",
-          url: urlBody,
-          headers: {},
-          data: data,
-        };
-        axios(config)
+        addBookRsv({ bookId: this.bookid, data })
           .then((Response) => {
             console.log(Response);
             if (Response.status == 201) {
@@ -266,6 +256,7 @@ export default {
     getTime: function (time) {
       this.time = time;
     },
+
     //각종 rule 함수
     sIdRule: function () {
       return this.studentId.length == 8 && this.isStudentId();
@@ -277,57 +268,39 @@ export default {
       var re = new RegExp("^[0-9]+$");
       return re.test(this.studentId);
     },
+
     //api 책 정보 받아오기
     getBookInfo: function () {
       const { book } = this.$route.query;
-
-      const bookInfo = book;
-      console.log(bookInfo);
-      this.bookId = bookInfo.id;
-      this.bookTitle = bookInfo.title;
-      this.bookWriter = bookInfo.auther;
-      this.bookPublisher = bookInfo.publisher;
-      this.stockCnt = bookInfo.stockCount;
-      this.rsvCnt = bookInfo.reservationCount;
+      console.log(book);
+      this.bookId = book.id;
+      this.bookTitle = book.title;
+      this.bookWriter = book.auther;
+      this.bookPublisher = book.publisher;
+      this.stockCnt = book.stockCount;
+      this.rsvCnt = book.reservationCount;
       if (this.stockCnt == this.rsvCnt) {
         this.isRsv = "예약 불가능";
         this.isRsvDisable = true;
       } else {
         this.isRsv = "예약 가능";
       }
-      this.getBookStock();
-      this.getBookRsv();
-    },
-    //api 책 재고 받아오기
-    getBookStock: function () {
-      let urlBody =
-        "https://us-central1-kit-fleamarket.cloudfunctions.net/books/" +
-        this.bookId +
-        "/stocks";
-      axios
-        .get(urlBody)
-        .then((Response) => {
-          this.stockList = Response.data;
-          console.log(this.stockList);
-          if (this.stockList.length == 0) {
+      getBookStock({ bookId: this.bookId })
+        .then((res) => {
+          console.log(res);
+          this.stockList = res.data;
+          if (this.stockList.length === 0) {
             this.isRsv = "매물 없음";
             this.isExistStock = false;
             this.isRsvDisable = true;
           }
         })
-        .catch((Error) => {
-          console.log(Error);
+        .catch((err) => {
+          console.log(err);
         });
-    },
-    getBookRsv: function () {
-      let urlBody =
-        "https://us-central1-kit-fleamarket.cloudfunctions.net/books/" +
-        this.bookId +
-        "/reservations";
-      axios
-        .get(urlBody)
-        .then((Response) => {
-          this.rsvRawList = Response.data;
+      getBookRsv({ bookId: this.bookId })
+        .then((res) => {
+          this.rsvRawList = res.data;
           console.log(this.rsvRawList);
         })
         .catch((Error) => {
