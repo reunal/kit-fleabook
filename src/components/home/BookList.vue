@@ -1,9 +1,7 @@
 <template>
   <v-container>
     <transition-group name="fade">
-      <div v-for="book in bookList" :key="book.id">
-        <book-card :book="book" />
-      </div>
+      <book-card :book="book" v-for="book in bookList" :key="book.id" />
       <div :key="loading" v-if="isEmptySearchResult()" class="msg">
         해당하는 도서가 없습니다 🥺
       </div>
@@ -24,10 +22,8 @@ const SEARCH_CNT = 8;
 
 export default {
   components: { BookCard, CardSkeleton },
-  model: {
-    prop: "text",
-  },
-  props: ["text"],
+  model: { prop: "text" },
+  props: ["text", "filter"],
   data: () => ({
     booksDB: [],
     searchList: [],
@@ -44,11 +40,14 @@ export default {
     /* 책 DB 가져오기 */
     this.loading = true;
     const { data } = await getBooks();
+    this.booksDB = data;
     this.loading = false;
-    this.booksDB = [...data];
     this.search();
   },
   methods: {
+    isEmptySearchResult() {
+      return !this.loading && !this.bookList.length;
+    },
     bottomVisible() {
       const { clientHeight, scrollHeight } = document.documentElement;
       const bottomOfPage = clientHeight + window.scrollY + 100 >= scrollHeight;
@@ -60,37 +59,43 @@ export default {
       this.searchList = this.booksDB.filter((item) => {
         const { title, publisher, author } = item;
         return (
-          title.includes(this.text) ||
-          publisher.includes(this.text) ||
-          author.includes(this.text)
+          this.onFilter(item) &&
+          (title.includes(this.text) ||
+            publisher.includes(this.text) ||
+            author.includes(this.text))
         );
       });
       this.getBookList();
     },
     getBookList() {
       if (this.searchList.length <= this.startIdx) return;
-      
-        /*  [...bookList, ...searchList]하면 버그 발생 주의  */
-        /*  splice는 실제로 자르기에 별도 객체(깊은 복사) 필요  */
-        this.bookList.push(...[...this.searchList].splice(this.startIdx, SEARCH_CNT));
-        this.startIdx += SEARCH_CNT;
+      /*  [...bookList, ...searchList]하면 버그 발생 주의  */
+      /*  splice는 실제로 자르기에 별도 객체(깊은 복사) 필요  */
+      this.bookList.push(
+        ...[...this.searchList].splice(this.startIdx, SEARCH_CNT)
+      );
+      this.startIdx += SEARCH_CNT;
     },
-    isEmptySearchResult() {
-      return !this.loading && !this.bookList.length;
+    onFilter(book) {
+      // 필
+      return (this.filter && book.stockCount !== book.reservationCount) || !this.filter;
     },
   },
   watch: {
-    reachBottom(bottom) {
-      if (!bottom || this.searchList.length <= this.startIdx) return;
+    reachBottom(reachBottom) {
+      if (!reachBottom || this.searchList.length <= this.startIdx) return;
 
       /* 인위적인 loading */
       this.loading = true;
       setTimeout(() => {
         this.loading = false;
         this.getBookList();
-      }, 300)
+      }, 300);
     },
     text() {
+      this.search();
+    },
+    filter() {
       this.search();
     },
   },
@@ -98,10 +103,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fade-enter-active {
+.fade-enter-active{
   transition: opacity 0.5s;
 }
-.fade-enter {
+.fade-leave-active{
+  transition: opacity 0.15s;
+}
+.fade-enter, .fade-leave-to{
   opacity: 0;
 }
 .msg {

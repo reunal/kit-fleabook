@@ -25,6 +25,7 @@
 <script>
 import { checkReservePassword } from '../../api';
 export default {
+  model: { prop: "itemId" },
   props: ["itemId"],
   data: () => ({
     text: "",
