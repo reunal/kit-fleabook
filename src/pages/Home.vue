@@ -16,7 +16,7 @@ export default {
   }),
   created() {
     const search = sessionStorage.getItem('search');
-    if(search) this.text = search;
+    if(search !== 'null') this.text = search;
   },
   components: { BookInput, BookList, Empty,  },
 };
