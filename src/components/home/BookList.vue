@@ -4,16 +4,11 @@
       <div v-for="(book, i) in bookList" :key="i">
         <book-card :book="book" />
       </div>
+      <div :key="loading" v-if="!loading && !bookList.length" class="msg">해당하는 도서가 없습니다 🥺</div>
     </transition-group>
 
     <div v-if="loading">
-      <div v-for="i in [1, 2, 3, 4, 5, 6, 7]" :key="i">
-        <v-skeleton-loader
-          class="skeleton"
-          tile
-          type="card-heading, list-item-two-line"
-        />
-      </div>
+      <card-skeleton v-for="i in [1, 2, 3, 4, 5, 6, 7]" :key="i" />
     </div>
   </v-container>
 </template>
@@ -21,11 +16,12 @@
 <script>
 import { getBooks } from "@/api/index";
 import BookCard from "./BookCard.vue";
+import CardSkeleton from './CardSkeleton.vue';
 
-const SEARCH_CNT = 5;
+const SEARCH_CNT = 10;
 
 export default {
-  components: { BookCard },
+  components: { BookCard, CardSkeleton },
   model: {
     prop: "text",
   },
@@ -35,7 +31,7 @@ export default {
     lastName: "",
     searchEnd: false,
     loading: false,
-    reachBottom: false,
+    reachBottom: false
   }),
   async created() {
     window.addEventListener("scroll", () => {
@@ -49,27 +45,27 @@ export default {
       const bottomOfPage = clientHeight + window.scrollY + 100 >= scrollHeight;
       return bottomOfPage || scrollHeight < clientHeight;
     },
-    async addBooks() {
+
+    async addBooks(start=this.text) {
       if (this.searchEnd) return;
-
+      /* 책 가져오기 */
       this.loading = true;
-
-      const { data } = await getBooks({text: this.text, len: SEARCH_CNT});
-      console.log(data)
-      this.bookList = [...this.bookList, ...data];
-      // if(this.bottomVisible())
-      //   this.addArr();
-
+      const { data } = await getBooks({start, len: SEARCH_CNT});
       this.searchEnd = data.length < SEARCH_CNT;
+      this.bookList = [...this.bookList, ...data];
+      console.log(data)
       this.loading = false;
     },
   },
   watch: {
     reachBottom(bottom) {
-      if (bottom) this.addBooks();
+      const len = this.bookList.length;
+      if (bottom && len){
+        const {title} = this.bookList[len-1];
+        this.addBooks(title);
+      }
     },
-    text(text) {
-      console.log(text);
+    text() {
       this.bookList = [];
       this.searchEnd = false;
       this.addBooks();
@@ -79,23 +75,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.skeleton {
-  max-width: 700px;
-  margin: auto;
-  margin-top: 1px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  & > :first-child {
-    height: 40px;
-  }
-  & > :last-child {
-    height: 64px;
-  }
-}
-
 .fade-enter-active {
   transition: opacity 0.5s;
 }
 .fade-enter {
   opacity: 0;
+}
+.msg{
+  margin-top: 3rem;
+  text-align: center;
 }
 </style>
