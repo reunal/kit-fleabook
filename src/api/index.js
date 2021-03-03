@@ -6,7 +6,7 @@ const getBooks = ({start, len}) => {
   return axios.get(`${ip}/books?start=${start}&len=${len}`)
 }
 const searchReserve = (stdId) => {
-  return axios.get(`${ip}/users/:${stdId}/reservations`);
+  return axios.get(`${ip}/users/${stdId}/reservations`);
 }
 
 /* My Reserve */
