@@ -25,7 +25,8 @@ export default {
     openEdit: false
   }),
   methods: {
-    gotoEdit() {
+    gotoEdit(text) {
+      this.item["password"] = text;
       this.openPassword = false;
       this.openEdit = true;
     }

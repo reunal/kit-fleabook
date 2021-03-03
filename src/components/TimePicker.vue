@@ -27,8 +27,8 @@
       :allowed-minutes="allowedMinutes"
     >
       <v-spacer></v-spacer>
-      <v-btn text color="primary" @click="timeModal = false"> Cancel </v-btn>
-      <v-btn text color="primary" @click="setTime"> OK </v-btn>
+      <v-btn text color="primary" @click="timeModal = false"> 취소 </v-btn>
+      <v-btn text color="primary" @click="setTime"> 확인 </v-btn>
     </v-time-picker>
   </v-dialog>
 </template>
@@ -49,7 +49,7 @@ export default {
       this.$emit("getTime", this.time);
     },
     //timepicker 허용시간
-    allowedMinutes: (minute) => minute % 5 == 0,
+    allowedMinutes: (minute) => minute % 10 === 0,
   },
 };
 </script>

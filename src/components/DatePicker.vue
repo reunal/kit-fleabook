@@ -27,8 +27,8 @@
       max="2021-03-12"
     >
       <v-spacer></v-spacer>
-      <v-btn text color="primary" @click="dateMenu = false"> Cancel </v-btn>
-      <v-btn text color="primary" @click="setDate"> OK </v-btn>
+      <v-btn text color="primary" @click="dateMenu = false"> 취소 </v-btn>
+      <v-btn text color="primary" @click="setDate"> 확인 </v-btn>
     </v-date-picker>
   </v-menu>
 </template>
