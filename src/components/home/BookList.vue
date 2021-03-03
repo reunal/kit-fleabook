@@ -1,10 +1,12 @@
 <template>
   <v-container>
     <transition-group name="fade">
-      <div v-for="(book, i) in bookList" :key="i">
+      <div v-for="book in bookList" :key="book.id">
         <book-card :book="book" />
       </div>
-      <div :key="loading" v-if="!loading && !bookList.length" class="msg">해당하는 도서가 없습니다 🥺</div>
+      <div :key="loading" v-if="isEmptySearchResult()" class="msg">
+        해당하는 도서가 없습니다 🥺
+      </div>
     </transition-group>
 
     <div v-if="loading">
@@ -16,9 +18,9 @@
 <script>
 import { getBooks } from "@/api/index";
 import BookCard from "./BookCard.vue";
-import CardSkeleton from './CardSkeleton.vue';
+import CardSkeleton from "./CardSkeleton.vue";
 
-const SEARCH_CNT = 10;
+const SEARCH_CNT = 8;
 
 export default {
   components: { BookCard, CardSkeleton },
@@ -27,17 +29,24 @@ export default {
   },
   props: ["text"],
   data: () => ({
+    booksDB: [],
+    searchList: [],
     bookList: [],
-    lastName: "",
-    searchEnd: false,
+    startIdx: 0,
     loading: false,
-    reachBottom: false
+    reachBottom: false,
   }),
   async created() {
+    /* 탐색결과 스크롤의 끝 인식 */
     window.addEventListener("scroll", () => {
       this.reachBottom = this.bottomVisible();
     });
-    this.addBooks();
+    /* 책 DB 가져오기 */
+    this.loading = true;
+    const { data } = await getBooks();
+    this.loading = false;
+    this.booksDB = [...data];
+    this.search();
   },
   methods: {
     bottomVisible() {
@@ -45,30 +54,44 @@ export default {
       const bottomOfPage = clientHeight + window.scrollY + 100 >= scrollHeight;
       return bottomOfPage || scrollHeight < clientHeight;
     },
-
-    async addBooks(start=this.text) {
-      if (this.searchEnd) return;
-      /* 책 가져오기 */
-      this.loading = true;
-      const { data } = await getBooks({start, len: SEARCH_CNT});
-      this.searchEnd = data.length < SEARCH_CNT;
-      this.bookList = [...this.bookList, ...data];
-      console.log(data)
-      this.loading = false;
+    search() {
+      this.startIdx = 0;
+      this.bookList = [];
+      this.searchList = this.booksDB.filter((item) => {
+        const { title, publisher, author } = item;
+        return (
+          title.includes(this.text) ||
+          publisher.includes(this.text) ||
+          author.includes(this.text)
+        );
+      });
+      this.getBookList();
+    },
+    getBookList() {
+      if (this.searchList.length <= this.startIdx) return;
+      
+        /*  [...bookList, ...searchList]하면 버그 발생 주의  */
+        /*  splice는 실제로 자르기에 별도 객체(깊은 복사) 필요  */
+        this.bookList.push(...[...this.searchList].splice(this.startIdx, SEARCH_CNT));
+        this.startIdx += SEARCH_CNT;
+    },
+    isEmptySearchResult() {
+      return !this.loading && !this.bookList.length;
     },
   },
   watch: {
     reachBottom(bottom) {
-      const len = this.bookList.length;
-      if (bottom && len){
-        const {title} = this.bookList[len-1];
-        this.addBooks(title);
-      }
+      if (!bottom || this.searchList.length <= this.startIdx) return;
+
+      /* 인위적인 loading */
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+        this.getBookList();
+      }, 300)
     },
     text() {
-      this.bookList = [];
-      this.searchEnd = false;
-      this.addBooks();
+      this.search();
     },
   },
 };
@@ -81,7 +104,7 @@ export default {
 .fade-enter {
   opacity: 0;
 }
-.msg{
+.msg {
   margin-top: 3rem;
   text-align: center;
 }

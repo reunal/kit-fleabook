@@ -26,7 +26,6 @@ export default {
     search: "",
   }),
   created() {
-    console.log(this.text)
     this.search = this.text ? this.text : "";
   },
   methods: {

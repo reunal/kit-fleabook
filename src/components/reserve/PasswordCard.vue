@@ -39,11 +39,10 @@ export default {
         this.errMessage = "입력해주세요.";
         return;
       }
-      const stdId = sessionStorage.getItem("stdId");
-      if(!stdId) return;
+      console.log(this.itemId)
 
       this.loading = true;
-      const { data } = await checkReservePassword({stdId, password: this.text});
+      const { data } = await checkReservePassword({reservationId: this.itemId, password: this.text});
       console.log(data)
       this.loading = false;
       if (this.text !== "asdf") {
