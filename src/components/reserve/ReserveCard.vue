@@ -30,7 +30,7 @@ export default {
   methods: {
     onBookDetail() {
       console.log("bookId", this.item.bookId);
-      //   this.$router.push({path: 'detail', params: {book: this.book}})
+      this.$router.push({path: 'detail', params: {book: this.book}})
     },
   },
 };
