@@ -4,6 +4,7 @@
       <v-text-field
         v-model="text"
         counter
+        hint="비밀번호에 한글, 영문 모두 입력될 수 있습니다."
         :loading="loading"
         :type="show ? 'text' : 'password'"
         :error-messages="errMessage"
@@ -23,7 +24,7 @@
 </template>
 
 <script>
-import { checkReservePassword } from '../../api';
+import { checkReservePassword } from "../../api";
 export default {
   model: { prop: "itemId" },
   props: ["itemId"],
@@ -40,17 +41,20 @@ export default {
         this.errMessage = "입력해주세요.";
         return;
       }
-      console.log(this.itemId)
 
       this.loading = true;
-      const { data } = await checkReservePassword({reservationId: this.itemId, password: this.text});
-      console.log(data)
+      const params = { reserveId: this.itemId, password: this.text };
+      const { data } = await checkReservePassword(params);
+      const { success } = data;
       this.loading = false;
-      if (this.text !== "asdf") {
+
+      if (!success) {
         this.errMessage = "틀린 비밀번호입니다.";
         return;
       }
-      this.$emit("gotoEdit", this.text);
+      this.$emit("gotoEdit", params.password);
+      this.text = "";
+      this.errMessage = "";
     },
   },
 };

@@ -78,7 +78,7 @@ export default {
           password: this.password,
           studentId: this.studentId,
           name: this.name,
-          time: this.hours + ":" + this.minute,
+          time: this.hour + ":" + this.minute,
           date: this.date,
         };
         console.log(data);

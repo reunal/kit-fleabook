@@ -1,51 +1,45 @@
 <template>
   <v-menu
-    ref="menuRef"
-    v-model="dateMenu"
-    :close-on-content-click="false"
-    :return-value.sync="date"
-    transition="scale-transition"
     offset-y
+    v-model="menu"
+    :close-on-content-click="false"
+    :nudge-right="40"
+    transition="scale-transition"
     min-width="auto"
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-combobox
-        v-model="date"
-        label="날짜를 선택해주세요"
-        prepend-icon="mdi-calendar"
+      <v-text-field
         readonly
+        v-model="date"
+        label="예약 날짜"
+        prepend-icon="mdi-calendar"
         v-bind="attrs"
         v-on="on"
-        :disabled="isRsvDisable"
-      ></v-combobox>
+      ></v-text-field>
     </template>
     <v-date-picker
       v-model="date"
       no-title
-      scrollable
       min="2021-03-10"
       max="2021-03-12"
-    >
-      <v-spacer></v-spacer>
-      <v-btn text color="primary" @click="dateMenu = false"> 취소 </v-btn>
-      <v-btn text color="primary" @click="setDate"> 확인 </v-btn>
-    </v-date-picker>
+      @input="setDate()"
+    />
   </v-menu>
 </template>
 
 <script>
 export default {
   name: "DatePicker",
-  props: ["isRsvDisable"],
+  props: ["reservDate"],
   data: function () {
     return {
-      dateMenu: false,
-      date: null,
+      menu: false,
+      date: this.reservDate,
     };
   },
   methods: {
-    setDate: function () {
-      this.$refs.menuRef.save(this.date);
+    setDate() {
+      this.menu = false;
       this.$emit("getDate", this.date);
     },
   },

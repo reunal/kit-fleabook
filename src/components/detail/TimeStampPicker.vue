@@ -57,7 +57,6 @@ export default {
     },
     setHour() {
         if(!this.minute) this.minute = "00";
-        console.log(this.minute)
     }
   },
 };
