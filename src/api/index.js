@@ -30,14 +30,18 @@ const cancelReserve = ({bookId, reserveId, password, data}) => {
 }
 
 /* BOOK DETAIL */
-const addBookRsv = ({bookId, data}) => {
-  return axios.post(`${ip}/books/${bookId}/reservation`, data)
+const addBookRsv = ({ bookId, data }) => {
+  return axios.post(`${ip}/books/${bookId}/reservations`, data)
 }
-const getBookStock = ({bookId}) => {
+const getBookInfo = ({ bookId }) => {
+  return axios.get(`${ip}/books/${bookId}`)
+}
+const getBookStock = ({ bookId }) => {
   return axios.get(`${ip}/books/${bookId}/stocks`)
 }
-const getBookRsv = ({bookId}) => {
+const getBookRsv = ({ bookId }) => {
   return axios.get(`${ip}/books/${bookId}/reservations`)
 }
 
-export {getBooks, searchReserve, checkReservePassword, editReserve, cancelReserve, addBookRsv, getBookStock, getBookRsv}
+
+export {getBooks, searchReserve, checkReservePassword, editReserve, cancelReserve, addBookRsv, getBookInfo, getBookStock, getBookRsv}

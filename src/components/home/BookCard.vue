@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     onClick() {
-      this.$router.push({ path: "book", query: { book: this.book } });
+      this.$router.push({ path: "book", query: { bookId: this.book.id } });
     },
   },
 };
