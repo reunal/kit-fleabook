@@ -14,7 +14,6 @@
         label="시간"
         :items="hours"
         :disabled="isRsvDisable"
-        width="175px"
         @input="setHour"
       />
       <div style="width: min(2vw, 14px)"></div>
@@ -56,7 +55,7 @@ export default {
       }
     },
     setHour() {
-        if(!this.minute) this.minute = "00";
+      if(!this.minute) this.minute = "00";
     }
   },
 };
@@ -64,6 +63,6 @@ export default {
 
 <style scoped>
 .inlineDiv {
-  display: inline-flex;
+  display: flex;
 }
 </style>

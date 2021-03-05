@@ -5,7 +5,7 @@
       label="시간"
       menu-props="auto"
       hide-details
-      :items="['10', '11', '12', '13', '14', '15', '16', '17', '18']"
+      :items="['10', '11', '12', '13', '14', '15', '16', '17']"
       @input="setTime()"
     />
     <v-select

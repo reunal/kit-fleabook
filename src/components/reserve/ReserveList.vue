@@ -32,8 +32,8 @@ export default {
   }),
   async created() {
     const { id } = this.$route.query;
-    const stdId = sessionStorage.getItem("stdId");
-    if (id || stdId) {
+    const stdId = id ? id : sessionStorage.getItem("stdId");
+    if (stdId) {
       this.loading = true;
       const { data } = await searchReserve(id ? id : stdId);
       this.list = data;

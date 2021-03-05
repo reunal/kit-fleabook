@@ -54,7 +54,7 @@ export default {
       this.$emit("filterEvent", this.filter)
     },
     renderTooltip() {
-      return this.filter ? "모든 도서 보기" : "예약 가능 도서만 보기";
+      return this.filter ? "모든 도서 보기" : "예약 가능한 도서만 보기";
     },
     renderIcon() {
       return this.filter ? "mdi-filter" : "mdi-filter-remove-outline";

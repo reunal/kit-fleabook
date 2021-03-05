@@ -36,7 +36,9 @@ export default {
       this.$router.push({path: 'book', query: {bookId: this.bookId}});
     },
     renderDate() {
-      return this.date.substring(this.date.indexOf('-')+1);
+      const dayOfWeek = new Date(this.date).getDay();
+      const ko = ["일", "월", "화", "수", "목", "금", "토"]
+      return this.date.substring(this.date.indexOf('-')+1) + `(${ko[dayOfWeek]})`;
     }
   },
 };

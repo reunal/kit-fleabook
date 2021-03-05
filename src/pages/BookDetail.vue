@@ -136,7 +136,7 @@ export default {
       }
       if (this.stockInfo.stockList.length === 0) {
         this.bookInfo.isRsv = "매물 없음";
-        this.bookInfo.isExistStock = false;
+        this.stockList.isExistStock = false;
         this.rsvInfo.isRsvDisable = true;
       }
     },

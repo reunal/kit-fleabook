@@ -3,7 +3,7 @@
     <transition-group name="fade">
       <book-card :book="book" v-for="book in bookList" :key="book.id" />
       <div :key="loading" v-if="isEmptySearchResult()" class="msg">
-        해당하는 도서가 없습니다 🥺
+        검색되는 도서가 없습니다 🥺
       </div>
     </transition-group>
 
@@ -40,7 +40,7 @@ export default {
     /* 책 DB 가져오기 */
     this.loading = true;
     const { data } = await getBooks();
-    this.booksDB = data;
+    this.booksDB = data.sort((a,b) => a.title < b.title ? -1 : 1);
     this.loading = false;
     this.search();
   },
