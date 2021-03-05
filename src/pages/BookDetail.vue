@@ -69,6 +69,9 @@ export default {
         minutes: [],
         rsvRawList: [],
         rsvList: [],
+        todayInfo: null,
+        isHourDisable: false,
+        isMinuteDisable: false,
         //입력 받을 데이터들
         studentId: "",
         name: "",
@@ -99,12 +102,13 @@ export default {
           const { data } = res;
           this.bookInfo.bookTitle = data.title;
           this.rsvInfo.bookTitle = data.title;
-          this.bookInfo.bookWriter = data.auther;
+          this.bookInfo.bookWriter = data.author;
           this.bookInfo.bookPublisher = data.publisher;
           this.stockInfo.stockCnt = data.stockCount;
           this.stockInfo.rsvCnt = data.reservationCount;
           getBookStock({ bookId: this.bookId })
             .then((res) => {
+              console.log(res.data);
               this.stockInfo.stockList = res.data;
               this.setValues();
             })
@@ -114,6 +118,7 @@ export default {
             });
           getBookRsv({ bookId: this.bookId })
             .then((res) => {
+              console.log(res.data);
               this.rsvInfo.rsvRawList = res.data;
               this.loading = false;
             })

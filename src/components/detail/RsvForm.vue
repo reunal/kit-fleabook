@@ -60,6 +60,7 @@ export default {
   methods: {
     //예약버튼
     addRsv: function () {
+      this.todayInfo = new Date();
       if (
         !(
           this.sIdRule() &&
@@ -73,6 +74,13 @@ export default {
       } else if (!this.date || !this.hour || !this.minute) {
         this.alert = true;
         this.alertMessage = "날짜와 시간을 입력했는지 확인해주세요!";
+      } else if (
+        new Date(this.date + " " + this.hour + ":" + this.minute) <
+        this.todayInfo
+      ) {
+        this.alert = true;
+        this.alertMessage =
+          "입력한 날짜와 시간이 현재 시각보다 이전입니다. 다시 확인해주세요!";
       } else {
         this.alert = false;
         this.alertMessage = "";

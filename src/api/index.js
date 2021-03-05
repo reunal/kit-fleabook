@@ -10,22 +10,22 @@ const searchReserve = (stdId) => {
 }
 
 /* My Reserve */
-const checkReservePassword = ({reservationId, password}) => {
+const checkReservePassword = ({ reservationId, password }) => {
   return axios.get(`${ip}/reservations/${reservationId}/password?password=${password}`);
 }
-const editReserve = ({reservationId, password}) => {
-//   {
-//     "time":"2021-02-12-15",
-//     "isCancle":"dfs",
-//     "password":"fds",
-//     "studentId":"fds",
-//     "name":"fds",
-//     "title":"fds",
-//     "bookId":"fdsfds"
-// }
+const editReserve = ({ reservationId, password }) => {
+  //   {
+  //     "time":"2021-02-12-15",
+  //     "isCancle":"dfs",
+  //     "password":"fds",
+  //     "studentId":"fds",
+  //     "name":"fds",
+  //     "title":"fds",
+  //     "bookId":"fdsfds"
+  // }
   return axios.put(`${ip}/reservations/${reservationId}?password=${password}`)
 }
-const cancelReserve = ({bookId, reserveId, password, data}) => {
+const cancelReserve = ({ bookId, reserveId, password, data }) => {
   return axios.delete(`${ip}/books/${bookId}/reservations/${reserveId}?password=${password}`, data);
 }
 
@@ -44,4 +44,4 @@ const getBookRsv = ({ bookId }) => {
 }
 
 
-export {getBooks, searchReserve, checkReservePassword, editReserve, cancelReserve, addBookRsv, getBookInfo, getBookStock, getBookRsv}
+export { getBooks, searchReserve, checkReservePassword, editReserve, cancelReserve, addBookRsv, getBookInfo, getBookStock, getBookRsv }

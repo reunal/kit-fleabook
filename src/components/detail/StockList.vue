@@ -11,6 +11,7 @@
             <tr>
               <th>상태</th>
               <th>가격</th>
+              <th>판매여부</th>
             </tr>
           </thead>
           <tbody>
@@ -18,9 +19,18 @@
               v-for="(stock, index) in stockList"
               :key="(stock, index)"
               v-bind:id="index"
+              :style="setListBackground(stock.isSold)"
             >
-              <td>{{ stock.state }}</td>
-              <td>{{ stock.price }}</td>
+              <td>
+                {{ stock.state }}
+              </td>
+              <td>
+                {{ stock.price }}
+              </td>
+              <td>
+                <div v-if="stock.isSold">판매 완료</div>
+                <div v-if="!stock.isSold">판매 중</div>
+              </td>
             </tr>
           </tbody>
         </template>
@@ -35,6 +45,14 @@ export default {
   props: ["stockInfo"],
   data: function () {
     return this.stockInfo;
+  },
+  methods: {
+    setListBackground(isSold) {
+      if (isSold) {
+        return { color: "#d97a7c" };
+      }
+      return {};
+    },
   },
 };
 </script>
