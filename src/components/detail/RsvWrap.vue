@@ -5,7 +5,7 @@
     </div>
     <div data-app :disabled="isRsvDisable">
       <time-stamp-picker :rsvInfo="rsvInfo"></time-stamp-picker>
-      <rsv-time-list :rsvInfo="rsvInfo"></rsv-time-list>
+      <rsv-time-list :rsvList="rsvInfo.rsvList"></rsv-time-list>
       <rsv-form :reqInfo="rsvInfo"></rsv-form>
     </div>
     <rsv-progress :rsvInfo="rsvInfo"></rsv-progress>

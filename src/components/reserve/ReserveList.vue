@@ -10,12 +10,17 @@
     </div>
 
     <transition-group name="fade">
-      <div v-for="(item, idx) in list" :key="idx">
-        <reserve-card v-if="!loading" :item="item" class="card" />
+    <div :key="loading">
+      <div v-if="!loading">
+        <reserve-card v-for="item in list" :key="item.id" :item="item" class="mb-1" />
       </div>
-      <div :key="loading" v-if="!loading && !list.length" class="msg">
+      <div v-if="isSearch && !loading && !list.length" class="text-center">
         예약한 도서가 없습니다 🥺
       </div>
+      <div v-else-if="!loading" class="mb-auto text--disabled text-center mt-5">
+        예약에 관련하여 오류가 있으면 000 으로 문의해주세요!
+      </div>
+    </div>
     </transition-group>
   </v-container>
 </template>
@@ -29,17 +34,28 @@ export default {
   data: () => ({
     list: [],
     loading: false,
+    isSearch: false
   }),
   async created() {
     const { id } = this.$route.query;
     const stdId = id ? id : sessionStorage.getItem("stdId");
     if (stdId) {
+      this.isSearch = true;
       this.loading = true;
       const { data } = await searchReserve(id ? id : stdId);
-      this.list = data;
+      this.list = data.sort((a,b) => this.getTime(a)-this.getTime(b));
       this.loading = false;
     }
   },
+  methods: {
+    getTime(item){
+      const date = new Date(item.date);
+      const [h, m] = item.time.split(":");
+      date.setHours(h);
+      date.setMinutes(m);
+      return date.getTime();
+    },
+  }
 };
 </script>
 
@@ -54,10 +70,5 @@ export default {
 .fade-enter {
   opacity: 0;
 }
-.msg {
-  text-align: center;
-}
-.card {
-  margin-bottom: 3px;
-}
+
 </style>

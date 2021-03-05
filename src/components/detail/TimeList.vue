@@ -1,5 +1,5 @@
 <template>
-  <v-simple-table dense v-if="!(date == null || rsvList.length == 0)">
+  <v-simple-table dense>
     <template v-slot:default>
       <thead>
         <tr>
@@ -9,13 +9,10 @@
       <tbody>
         <tr>
           <td id="timeList">
-            <span
-              v-for="(rsv, index) in rsvList"
-              :key="(rsv, index)"
-              v-bind:id="index"
-            >
+            <span v-for="(rsv, idx) in list" :key="(rsv, idx)" :id="idx">
               {{ rsv }}
             </span>
+            <span v-if="!list.length" class="text--secondary">none</span>
           </td>
         </tr>
       </tbody>
@@ -26,10 +23,16 @@
 <script>
 export default {
   name: "RsvTimeList",
-  props: ["rsvInfo"],
-  data: function () {
-    return this.rsvInfo;
+  props: ["rsvList"],
+  data() {
+    return { list: [] };
   },
+  watch: {
+    rsvList() {
+      this.list = [...this.rsvList];
+      this.list.sort()
+    }
+  }
 };
 </script>
 
