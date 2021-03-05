@@ -1,17 +1,17 @@
 <template>
   <v-card :disabled="isCancle">
-    <v-list-item three-line>
-      <v-list-item-content>
-        <v-list-item-title class="headline mb-1">
-          <span class="book-title" @click="onBookDetail">{{ title }}</span>
+    <v-list-item three-line class="pl-0">
+      <v-list-item-content class="card-hover pl-5 mr-5" @click="onBookDetail">
+        <v-list-item-title class="title font-weight-bold mb-2">
+          <span>{{ title }}</span>
         </v-list-item-title>
 
-        <v-list-item-subtitle class="subtitle"> 
+        <v-list-item-subtitle class="subtitle mb-1"> 
           <span>{{renderDate()}}</span> 
           <span>{{ time }}</span>
           <span>{{ name }}</span>
         </v-list-item-subtitle>
-        <v-list-item-subtitle class="font-weight-thin">
+        <v-list-item-subtitle class="font-weight-light">
           예약번호 {{ id }}
         </v-list-item-subtitle>
       </v-list-item-content>
@@ -49,7 +49,7 @@ export default {
   margin: auto;
   max-width: 600px;
 }
-.book-title {
+.card-hover {
   cursor: pointer;
   transition-duration: 0.5s;
   &:hover {

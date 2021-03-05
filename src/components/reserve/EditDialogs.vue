@@ -3,6 +3,12 @@
     <v-btn v-if="!item.isSold" text icon large @click.stop="openPassword = true">
       <v-icon>mdi-pencil</v-icon>
     </v-btn>
+    <div v-else-if="item.isCancle" class="font-weight-black">
+      예약취소
+    </div>
+    <div v-else class="font-weight-black">
+      구매완료
+    </div>
 
     <v-dialog v-model="openPassword" max-width="500">
       <password-card :itemId="item.id" @gotoEdit="gotoEdit" />

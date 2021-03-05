@@ -2,10 +2,16 @@
   <v-card>
     <v-container>
       <v-card-title class="title">
-        <span class="font-weight-black">{{ item.title }}</span>
-        <span class="font-weight-thin">{{ item.id }}</span>
+        <v-tooltip right>
+          <template v-slot:activator="{ on, attrs }">
+            <span v-bind="attrs" v-on="on" class="font-weight-black">
+              {{ item.title }}
+            </span>
+          </template>
+          <span>도서번호 {{item.bookId}}</span>
+        </v-tooltip>
       </v-card-title>
-
+      
       <v-container class="inputs">
         <date-picker :reservDate="date" @getDate="getDate"></date-picker>
         <time-picker :reservTime="time" @getTime="getTime"></time-picker>
