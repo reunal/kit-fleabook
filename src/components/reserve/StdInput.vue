@@ -3,7 +3,7 @@
     <v-text-field
       label="학번"
       v-model="stdId"
-      :rules="[() => !!stdId || '올바른 8자리 학번을 입력하세요']"
+      :error-messages="errMessage"
       single-line
       outlined
       clearable
@@ -18,18 +18,24 @@
 
 <script>
 export default {
-  data: () => ({
-    stdId: "",
-  }),
-  created() {
-    this.stdId = sessionStorage.getItem("stdId");
+  data() {
+    const { id } = this.$route.query;
+    const text = id ? id : sessionStorage.getItem("stdId");
+    return {
+      stdId: text ? text : "",
+      errMessage: ""
+    };
   },
   methods: {
     onClear() {
-      this.stdId = "";
       sessionStorage.removeItem("stdId");
+      this.stdId = "";
     },
     async onSearch() {
+      if(this.stdId.length !== 8){
+        this.errMessage = "올바른 8자리 학번을 입력하세요"
+        return;
+      }
       sessionStorage.setItem("stdId", this.stdId);
       this.$router.push({ path: "reserve", query: { id: this.stdId } });
     },

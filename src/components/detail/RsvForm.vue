@@ -52,7 +52,7 @@ export default {
     this.reqInfo.rules = {
       sIdReq: () => this.sIdRule() || "학번을 제대로 입력해주세요",
       passwdReq: () => this.passwdRule()[0] || "비밀번호를 입력해주세요.",
-      passwdMin: () => this.passwdRule()[1] || "적어도 8자리 이상 입력해주세요",
+      passwdMin: () => this.passwdRule()[1] || "적어도 4자리 이상 입력해주세요",
     };
     console.log(this.reqInfo);
     return this.reqInfo;
@@ -139,7 +139,7 @@ export default {
     },
     //각종 rule 함수
     sIdRule: function () {
-      return this.studentId.length == 8 && this.isStudentId();
+      return this.studentId.length === 8 && this.isStudentId();
     },
     passwdRule: function () {
       return [this.password != 0, this.password.length >= 4];

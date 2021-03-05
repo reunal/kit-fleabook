@@ -1,58 +1,48 @@
 <template>
-  <v-dialog
-    ref="dialogRef"
-    v-model="timeModal"
-    :return-value.sync="time"
-    persistent
-    width="290px"
-  >
-    <template v-slot:activator="{ on, attrs }">
-      <v-text-field
-        v-model="time"
-        label="시간을 선택해주세요"
-        prepend-icon="mdi-clock-time-four-outline"
-        readonly
-        v-bind="attrs"
-        v-on="on"
-        :disabled="isRsvDisable"
-      ></v-text-field>
-    </template>
-    <v-time-picker
-      v-if="timeModal"
-      v-model="time"
-      full-width
-      format="24hr"
-      min="10:00"
-      max="18:00"
-      :allowed-minutes="allowedMinutes"
-    >
-      <v-spacer></v-spacer>
-      <v-btn text color="primary" @click="timeModal = false"> 취소 </v-btn>
-      <v-btn text color="primary" @click="setTime"> 확인 </v-btn>
-    </v-time-picker>
-  </v-dialog>
+  <div class="wrapper">
+    <v-select
+      v-model="hour"
+      label="시간"
+      menu-props="auto"
+      hide-details
+      :items="['10', '11', '12', '13', '14', '15', '16', '17']"
+      @input="setTime()"
+    />
+    <v-select
+      v-model="minute"
+      label="분"
+      menu-props="auto"
+      hide-details
+      :items="['00', '10', '20', '30', '40', '50']"
+      @input="setTime()"
+    />
+  </div>
 </template>
 
 <script>
 export default {
   name: "TimePicker",
-  props: ["isRsvDisable"],
-  data: function () {
+  props: ["reservTime"],
+  data() {
+    const [h, m] = this.reservTime.split(":");
     return {
-      timeModal: false,
-      time: null,
+      hour: h,
+      minute: m,
     };
   },
   methods: {
-    setTime: function () {
-      this.$refs.dialogRef.save(this.time);
-      this.$emit("getTime", this.time);
+    setTime() {
+      this.$emit("getTime", `${this.hour}:${this.minute}`);
     },
-    //timepicker 허용시간
-    allowedMinutes: (minute) => minute % 10 === 0,
   },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.wrapper {
+  display: inline-flex;
+  & > * {
+    margin-right: 1rem;
+  }
+}
 </style>

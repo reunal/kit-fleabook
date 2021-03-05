@@ -7,18 +7,12 @@
 <script>
 export default {
   name: "LoadingDialog",
-  data() {
-    return {};
-  },
 };
 </script>
 
 <style lang="scss" scoped>
 .process-wrapper {
-  position: absolute;
-  z-index: 1000;
   text-align: center;
-  width: 90%;
-  margin-top: 3rem;
+  margin-top: 30%;
 }
 </style>
