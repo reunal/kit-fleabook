@@ -21,7 +21,6 @@
       label="예약 비밀번호 입력"
       hint="적어도 4자리 이상 입력해주세요"
       @click:append="isDisplayPasswd = !isDisplayPasswd"
-      @click.once="showWaringDialog"
       :append-icon="isDisplayPasswd ? 'mdi-eye' : 'mdi-eye-off'"
       :rules="[rules.passwdReq, rules.passwdMin]"
       :type="isDisplayPasswd ? 'text' : 'password'"

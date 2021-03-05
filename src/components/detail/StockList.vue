@@ -9,7 +9,12 @@
         <template v-slot:default>
           <thead>
             <tr>
-              <th>상태</th>
+              <th>
+                상태
+                <v-icon dense medium @click="showStateInfo">
+                  {{ "mdi-help-box" }}
+                </v-icon>
+              </th>
               <th>가격</th>
               <th>판매여부</th>
             </tr>
@@ -36,6 +41,26 @@
         </template>
       </v-simple-table>
     </div>
+    <v-dialog v-model="showStateInfoDialog" max-width="450">
+      <v-card>
+        <v-card-title class="headline"> 책 상태의 기준 </v-card-title>
+        <v-card-text>
+          상태 A : 상태 B,C 모두 해당하지 않을 때<br />
+          상태 B : 연필 및 샤프 표시, 겉표지 구김 중 하나가 있을 때<br />
+          상태 C : 볼펜 및 형광펜 표시, 페이지 회손 중 하나가 있을 때
+        </v-card-text>
+        <!-- <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="black darken-1"
+            text
+            @click="showStateInfoDialog = false"
+          >
+            닫기
+          </v-btn>
+        </v-card-actions> -->
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -52,6 +77,9 @@ export default {
         return { color: "#d97a7c" };
       }
       return {};
+    },
+    showStateInfo() {
+      this.showStateInfoDialog = true;
     },
   },
 };

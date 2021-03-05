@@ -29,7 +29,7 @@
 </template>
 
 <script>
-const dates = ["2021-03-05", "2021-03-11", "2021-03-12"];
+const dates = ["2021-03-10", "2021-03-11", "2021-03-12"];
 const hours = ["10", "11", "12", "13", "14", "15", "16", "17", "18"];
 const minutes = ["00", "10", "20", "30", "40", "50"];
 export default {
@@ -42,7 +42,8 @@ export default {
     setDate() {
       this.dates.splice(0, this.dates.length);
       for (let i = 0; i < dates.length; i++) {
-        if (new Date(dates[i] + " 23:59") >= this.todayInfo) {
+        const dl = this.splitDate(dates[i], "-");
+        if (new Date(dl[0], dl[1], dl[2], 23, 59, 59) >= this.todayInfo) {
           this.dates.push(dates[i]);
         }
       }
@@ -59,17 +60,14 @@ export default {
         this.isHourDisable = true;
       } else {
         this.isHourDisable = false;
+        const dl = this.splitDate(this.date, "-");
+        const tdl = this.splitDate(this.todayInfo.toLocaleDateString(), ".");
+        const todayHour = this.todayInfo.getHours();
         for (let i = 0; i < hours.length; i++) {
           if (
-            new Date(this.date + " " + hours[i] + ":00") >=
-            new Date(
-              this.todayInfo.toLocaleDateString() +
-                " " +
-                this.todayInfo.getHours() +
-                ":00"
-            )
+            new Date(dl[0], dl[1], dl[2], Number(hours[i]), 0, 0) >=
+            new Date(tdl[0], tdl[1], tdl[2], todayHour, 0, 0)
           ) {
-            console.log(hours[i]);
             this.hours.push(hours[i]);
           }
         }
@@ -83,9 +81,11 @@ export default {
         this.isMinuteDisable = true;
       } else {
         this.isMinuteDisable = false;
+        const dl = this.splitDate(this.date, "-");
+        const hour = Number(this.hour);
         for (let i = 0; i < minutes.length; i++) {
           if (
-            new Date(this.date + " " + this.hour + ":" + minutes[i]) >
+            new Date(dl[0], dl[1], dl[2], hour, Number(minutes[i]), 0) >
             this.todayInfo
           ) {
             this.minutes.push(minutes[i]);
@@ -99,23 +99,46 @@ export default {
       }
     },
     setRsvList() {
-      var re = new RegExp("[0-9]+-[0-9]+-[0-9]+-");
       this.rsvList.splice(0, this.rsvList.length);
       for (let i = 0; i < this.rsvRawList.length; i++) {
-        if (this.rsvRawList[i].time.includes(this.date)) {
-          let timeText = this.rsvRawList[i].time
-            .replace(re, "")
-            .replace("-", ":");
-          if (timeText.length == 2) {
-            timeText += ":00";
+        if (this.rsvRawList[i].date === undefined) {
+          continue;
+        }
+        if (this.rsvRawList[i].isSold === undefined) {
+          continue;
+        }
+        if (this.rsvRawList[i].isCancel === undefined) {
+          continue;
+        }
+        if (
+          this.rsvRawList[i].date.includes(this.date) &&
+          !this.rsvRawList[i].isSold &&
+          !this.rsvRawList[i].isCancel
+        ) {
+          let skipFlag = false;
+          for (let j = 0; j < this.rsvList.length; j++) {
+            if (this.rsvList[j] == this.rsvRawList[i].time) {
+              skipFlag = true;
+              break;
+            }
           }
-          this.rsvList.push(timeText);
+          if (skipFlag) {
+            continue;
+          }
+          this.rsvList.push(this.rsvRawList[i].time);
         }
       }
     },
     intervalMethod() {
       this.rsvInfo.todayInfo = new Date();
       this.setDate();
+    },
+    splitDate(date, separator) {
+      let list = date.split(separator);
+      list[0] = Number(list[0]);
+      list[1] = Number(list[1]) - 1;
+      list[2] = Number(list[2]);
+      return list;
     },
   },
   mounted() {

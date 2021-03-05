@@ -30,9 +30,9 @@ export default {
   watch: {
     rsvList() {
       this.list = [...this.rsvList];
-      this.list.sort()
-    }
-  }
+      this.list.sort();
+    },
+  },
 };
 </script>
 

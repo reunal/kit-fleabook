@@ -54,6 +54,7 @@ export default {
         stockCnt: 0,
         rsvCnt: 0,
         isExistStock: true,
+        showStateInfoDialog: false,
       },
       //예약 관련 변수
       rsvInfo: {
@@ -108,7 +109,6 @@ export default {
           this.stockInfo.rsvCnt = data.reservationCount;
           getBookStock({ bookId: this.bookId })
             .then((res) => {
-              console.log(res.data);
               this.stockInfo.stockList = res.data;
               this.setValues();
             })
