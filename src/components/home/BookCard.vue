@@ -2,7 +2,7 @@
   <v-card outlined @click="onClick">
     <v-list-item three-line>
       <v-list-item-content>
-        <v-list-item-title class="headline mb-1">
+        <v-list-item-title class="headline font-weight-bold mb-1">
           {{ title }}
         </v-list-item-title>
         <v-list-item-subtitle>

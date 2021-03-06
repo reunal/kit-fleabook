@@ -27,7 +27,6 @@ export default {
   },
   props: ["rsvInfo"],
   data() {
-    console.log(this.rsvInfo)
     return this.rsvInfo;
   },
 };

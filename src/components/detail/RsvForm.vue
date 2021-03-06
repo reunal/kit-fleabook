@@ -53,7 +53,6 @@ export default {
       passwdReq: () => this.passwdRule()[0] || "비밀번호를 입력해주세요.",
       passwdMin: () => this.passwdRule()[1] || "적어도 4자리 이상 입력해주세요",
     };
-    console.log(this.reqInfo);
     return this.reqInfo;
   },
   methods: {
@@ -92,14 +91,12 @@ export default {
           time: this.hour + ":" + this.minute,
           date: this.date,
         };
-        console.log(data);
         this.processRsv = false;
         this.isRsvSuccess = true;
         this.rsvResultTitle = "예약 성공";
         this.rsvResultText = "예약이 성공적으로 진행되었습니다!";
         addBookRsv({ bookId: this.bookId, data })
           .then((Response) => {
-            console.log(Response);
             if (Response.status == 201) {
               this.processRsv = false;
               this.isRsvSuccess = true;
@@ -124,15 +121,12 @@ export default {
               // Node.js의 http.ClientRequest 인스턴스입니다.
               this.rsvResultTitle = "예약 실패";
               this.rsvResultText = "서버로 부터 응답을 받지 못했습니다.";
-              console.log(error.request);
             } else {
               // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
               this.rsvResultTitle = "예약 실패";
               this.rsvResultText =
                 "오류 발생 후 오류 처리 중 문제가 발생했습니다.";
-              console.log("Error", error.message);
             }
-            console.log(error.config);
           });
       }
     },

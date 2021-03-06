@@ -1,12 +1,9 @@
 <template>
   <v-row justify="center">
-    <v-btn v-if="!item.isSold" text icon large @click.stop="openPassword = true">
+    <v-btn v-if="!item.isSold && !item.isCancel" text icon large @click.stop="openPassword = true">
       <v-icon>mdi-pencil</v-icon>
     </v-btn>
-    <div v-else-if="item.isCancle" class="font-weight-black">
-      예약취소
-    </div>
-    <div v-else class="font-weight-black">
+    <div v-else-if="item.isSold" class="font-weight-black">
       구매완료
     </div>
 

@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <div style="margin-top: 50px"></div>
     <transition-group name="fade">
       <book-card :book="book" v-for="book in bookList" :key="book.id" />
       <div :key="loading" v-if="isEmptySearchResult()" class="msg">

@@ -17,9 +17,9 @@
       <div v-if="isSearch && !loading && !list.length" class="text-center">
         예약한 도서가 없습니다 🥺
       </div>
-      <div v-else-if="!loading" class="mb-auto text--disabled text-center mt-5">
+      <!-- <div v-else-if="!loading" class="mb-auto text--disabled text-center mt-5">
         예약에 관련하여 오류가 있으면 000 으로 문의해주세요!
-      </div>
+      </div> -->
     </div>
     </transition-group>
   </v-container>

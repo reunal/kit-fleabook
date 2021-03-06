@@ -14,16 +14,16 @@
     </v-dialog>
     <v-dialog v-model="isRsvSuccess" max-width="290" persistent>
       <v-card>
-        <v-card-title class="headline">
+        <v-card-title class="headline font-weight-black">
           {{ rsvResultTitle }}
         </v-card-title>
 
-        <v-card-text>
+        <v-card-text class="font-weight-bold">
           {{ rsvResultText }}
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="black darken-1" text @click="closeBtn"> 닫기 </v-btn>
+          <v-btn color="black darken-1" text @click="closeBtn" class="font-weight-black"> 닫기 </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

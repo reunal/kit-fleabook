@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="wrapper">
     <v-text-field
       label="제목, 출판사, 저자 검색"
       v-model="search"
@@ -22,7 +22,7 @@
         </v-tooltip>
       </template>
     </v-text-field>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -64,9 +64,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.wrapper {
+  width: 100%;
   position: fixed;
-  padding: 0 20px 0 0;
+  padding: 0 10px 0 0;
   z-index: 1000;
   & > .v-input {
     max-width: 500px;

@@ -59,9 +59,20 @@ export default {
       this.$emit("input", false);
       if (this.reload) window.location.reload();
     },
+
     onEdit() {
+      const curTime = new Date(this.date);
+      const [h,m] = this.time.split(":");
+      curTime.setHours(h);
+      curTime.setMinutes(m);
+      if(new Date().getTime() > curTime.getTime()){
+        this.msg = "지나간 시간은 되돌아 오지 않습니다 🤭"
+        return;
+      }
+
       const { id: reserveId, password } = this.item;
       const body = { date: this.date, time: this.time };
+
       this.loading = true;
       editReserve({ reserveId, password, body })
         .then(() => {
@@ -75,6 +86,7 @@ export default {
           this.msg = "시스템 내부 오류가 발생했습니다 😢";
         });
     },
+
     onCancel() {
       const { bookId, id: reserveId, password } = this.item;
       this.loading = true;

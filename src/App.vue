@@ -15,10 +15,10 @@ export default {
 
   components: {
     NavBar,
-  },
-
-  data: () => ({
-    //
-  }),
+  }
 };
 </script>
+
+
+<style lang="scss" scoped>
+</style>

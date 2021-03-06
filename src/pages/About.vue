@@ -17,7 +17,9 @@
       <v-row align="center" justify="center">
         <v-col class="text-center" cols="12">
           <h1 class="font-weight-black mb-4">Introduce</h1>
-          <h4 class="subheading">중고도서 예약 관리 시스템에 관한 설명을 아주 장황하게 적어도 된다.</h4>
+          <h4 class="subheading">안녕하세요 36대 비트윈 학생복지위원회 위원장 김보혁입니다.</h4>
+          <h4 class="subheading">앞으로도 학우분들의 복지를 위해 더 힘쓰는 학생복지위원회가 되겠습니다.</h4>
+          <h4 class="subheading">끝으로 벼룩시장 준비에 도움을 주신 컴공, 컴소공 개발자 및 학교 선생님들께 감사의 인사드립니다.</h4>
         </v-col>
       </v-row>
     </v-parallax>

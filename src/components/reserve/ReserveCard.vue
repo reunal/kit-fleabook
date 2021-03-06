@@ -1,5 +1,5 @@
 <template>
-  <v-card :disabled="isCancle">
+  <v-card :disabled="isCancel">
     <v-list-item three-line class="pl-0">
       <v-list-item-content class="card-hover pl-5 mr-5" @click="onBookDetail">
         <v-list-item-title class="title font-weight-bold mb-2">
