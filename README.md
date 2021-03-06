@@ -1,24 +1,12 @@
-# flea-book
+### 금오공대 중고도서 예약 시스템
 
-## Project setup
+---
+
+- Book detail -> wooseong
+- Else system -> bepyan
+- Backend -> oune
+---
 ```
 yarn install
-```
-
-### Compiles and hot-reloads for development
-```
 yarn serve
 ```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
