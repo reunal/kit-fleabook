@@ -31,14 +31,16 @@
         <v-col class="text-center" cols="12">
           <h1 class="font-weight-black mb-4">Developer</h1>
           <h4 class="subheading">컴퓨터소프트웨어공학과</h4>
-          <h4 class="subheading">16' 김평안</h4>
-          <h4 class="subheading">17' 조우성</h4>
+          <h5 class="subheading font-weight-light mt-2">예약 페이지</h5>
+          <h4 class="subheading">16' 김평안 17' 조우성</h4>
+          
+          <h5 class="subheading font-weight-light mt-2">백엔드</h5>
           <h4 class="subheading">19' 이준재</h4>
 
           <h1 class="headline- font-weight-black mb-4">.</h1>
           <h4 class="subheading">컴퓨터공학과</h4>
-          <h4 class="subheading">16' 김도현</h4>
-          <h4 class="subheading">16' 권익주</h4>
+          <h5 class="subheading font-weight-light mt-2">관리자 페이지</h5>
+          <h4 class="subheading">16' 김도현 16' 권익주</h4>
         </v-col>
       </v-row>
     </v-parallax>
