@@ -113,22 +113,18 @@ export default {
               this.setValues();
             })
             .catch((err) => {
-              console.log(err);
               this.loading = false;
             });
           getBookRsv({ bookId: this.bookId })
             .then((res) => {
-              console.log(res.data);
               this.rsvInfo.rsvRawList = res.data;
               this.loading = false;
             })
             .catch((Error) => {
-              console.log(Error);
               this.loading = false;
             });
         })
         .catch((err) => {
-          console.log(err);
           this.loading = false;
         });
     },
