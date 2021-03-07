@@ -113,7 +113,7 @@ export default {
               this.setValues();
             })
             .catch((err) => {
-              let err = err;
+              console.log(err);
               this.loading = false;
             });
           getBookRsv({ bookId: this.bookId })
@@ -122,12 +122,12 @@ export default {
               this.loading = false;
             })
             .catch((err) => {
-              let err = err;
+              console.log(err);
               this.loading = false;
             });
         })
         .catch((err) => {
-          let err = err;
+          console.log(err);
           this.loading = false;
         });
     },
