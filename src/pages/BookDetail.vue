@@ -101,6 +101,7 @@ export default {
       getBookInfo({ bookId: this.bookId })
         .then((res) => {
           const { data } = res;
+          console.log(data);
           this.bookInfo.bookTitle = data.title;
           this.rsvInfo.bookTitle = data.title;
           this.bookInfo.bookWriter = data.author;
@@ -141,6 +142,12 @@ export default {
       if (this.stockInfo.stockList.length === 0) {
         this.bookInfo.isRsv = "매물 없음";
         this.stockInfo.isExistStock = false;
+        this.rsvInfo.isRsvDisable = true;
+      }
+      //지정된 시간 이전에는 예약 버튼 클릭 불가능하게 막아놓기
+      this.todayInfo = new Date();
+      const startDate = new Date(2021, 2, 11, 0, 0, 0);
+      if (this.todayInfo < startDate) {
         this.rsvInfo.isRsvDisable = true;
       }
     },
