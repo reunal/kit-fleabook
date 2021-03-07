@@ -101,7 +101,6 @@ export default {
       getBookInfo({ bookId: this.bookId })
         .then((res) => {
           const { data } = res;
-          console.log(data);
           this.bookInfo.bookTitle = data.title;
           this.rsvInfo.bookTitle = data.title;
           this.bookInfo.bookWriter = data.author;
