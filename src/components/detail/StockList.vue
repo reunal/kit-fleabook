@@ -43,11 +43,13 @@
     </div>
     <v-dialog v-model="showStateInfoDialog" max-width="600">
       <v-card class="pa-7">
-        <v-card-title class="headline font-weight-black"> 책 상태의 기준 </v-card-title>
+        <v-card-title class="headline font-weight-black">
+          책 상태의 기준
+        </v-card-title>
         <v-card-text class="font-weight-bold">
-          상태 A : 상태 B,C 모두 해당하지 않을 때<br/>
+          상태 A : 상태 B,C 모두 해당하지 않을 때<br />
           상태 B : 연필 및 샤프 표시, 겉표지 구김 중 하나가 있을 때<br />
-          상태 C : 볼펜 및 형광펜 표시, 페이지 회손 중 하나가 있을 때
+          상태 C : 볼펜 및 형광펜 표시, 페이지 훼손 중 하나가 있을 때
         </v-card-text>
         <!-- <v-card-actions>
           <v-spacer></v-spacer>

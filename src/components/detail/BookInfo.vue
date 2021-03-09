@@ -4,14 +4,41 @@
       <span id="title">{{ bookTitle }}</span>
       <span id="available">{{ isRsv }}</span>
     </div>
-    <v-chip color="gray" label small id="writer" class="chips">
-      <v-icon left> mdi-label </v-icon>
-      저자 : {{ bookWriter }}
-    </v-chip>
-    <v-chip color="gray" label small id="publisher" class="chips">
-      <v-icon left> mdi-label </v-icon>
-      출판사 : {{ bookPublisher }}
-    </v-chip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-chip
+          color="gray"
+          small
+          label
+          id="writer"
+          class="chips"
+          v-bind="attrs"
+          v-on="on"
+        >
+          <v-icon left> mdi-label </v-icon>
+          <div id="writerDiv">저자 : {{ bookWriter }}</div>
+        </v-chip>
+      </template>
+      <span id="writerTooltip">{{ bookWriter }}</span>
+    </v-tooltip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-chip
+          color="gray"
+          small
+          label
+          id="publisher"
+          class="chips"
+          v-bind="attrs"
+          v-on="on"
+        >
+          <v-icon left> mdi-label </v-icon>
+
+          <div id="publisherDiv">출판사 : {{ bookPublisher }}</div>
+        </v-chip>
+      </template>
+      <span id="publisherTooltip">{{ bookPublisher }}</span>
+    </v-tooltip>
   </div>
 </template>
 
@@ -48,5 +75,15 @@ export default {
 }
 #writer {
   margin-right: min(1vw, 4px);
+}
+#writerTooltip,
+#publisherTooltip {
+  word-break: break-all;
+}
+#writerDiv,
+#publisherDiv {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
