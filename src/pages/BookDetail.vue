@@ -165,7 +165,7 @@ export default {
       }
       //지정된 시간 이전에는 예약 버튼 클릭 불가능하게 막아놓기
       this.todayInfo = new Date();
-      const startDate = new Date(2022, 8, 14, 0, 0, 0);
+      const startDate = new Date(2022, 8, 15, 0, 0, 0);
 
       if (this.todayInfo < startDate) {
         this.rsvInfo.isRsvDisable = true;
