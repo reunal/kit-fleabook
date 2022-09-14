@@ -1,41 +1,23 @@
 <template>
   <div>
-    <v-select
-      v-model="date"
-      label="날짜"
-      :items="dates"
-      :disabled="isRsvDisable"
-      @input="setHour(true)"
-    />
+    <v-select v-model="date" label="날짜" :items="dates" :disabled="isRsvDisable" @input="setHour(true)" />
     <div class="inlineDiv">
-      <v-select
-        id="hour"
-        v-model="hour"
-        label="시간"
-        :items="hours"
-        :disabled="isRsvDisable || isHourDisable"
-        @input="setMinute"
-      />
+      <v-select id="hour" v-model="hour" label="시간" :items="hours" :disabled="isRsvDisable || isHourDisable"
+        @input="setMinute" />
       <div style="width: min(2vw, 14px)"></div>
-      <v-select
-        id="minute"
-        v-model="minute"
-        label="분"
-        :items="minutes"
-        :disabled="isRsvDisable || isMinuteDisable"
-      />
+      <v-select id="minute" v-model="minute" label="분" :items="minutes" :disabled="isRsvDisable || isMinuteDisable" />
     </div>
   </div>
 </template>
 
 <script>
-const dates = ["2021-08-13", "2021-08-14"];
+const dates = ["2022-09-15", "2022-09-16"];
 const hours = ["10", "11", "12", "13", "14", "15", "16", "17"];
 const minutes = ["00", "10", "20", "30", "40", "50"];
 export default {
   name: "TimeStampPicker",
   props: ["rsvInfo"],
-  data: function() {
+  data: function () {
     return this.rsvInfo;
   },
   methods: {
