@@ -37,7 +37,7 @@ export default {
     HelpArea,
   },
   //컴포넌트가 사용하는 변수 정의 및 초기화(비동기 사용 불가능)
-  data: function () {
+  data: function() {
     return {
       //책 정보 변수
       bookId: null,
@@ -103,7 +103,7 @@ export default {
   //컴포넌트가 사용하는 메소드 정의
   methods: {
     //api 책 정보 받아오기
-    getBook: function () {
+    getBook: function() {
       this.loading = true;
       this.bookId = this.$route.query.bookId;
       this.rsvInfo.bookId = this.bookId;
@@ -165,7 +165,7 @@ export default {
       }
       //지정된 시간 이전에는 예약 버튼 클릭 불가능하게 막아놓기
       this.todayInfo = new Date();
-      const startDate = new Date(2022, 8, 15, 0, 0, 0);
+      const startDate = new Date(2021, 7, 10, 0, 0, 0);
 
       if (this.todayInfo < startDate) {
         this.rsvInfo.isRsvDisable = true;
@@ -173,7 +173,7 @@ export default {
     },
   },
   //DOM을 업데이트 해서 view refresh하는 부분(비동기 사용 가능)
-  mounted: function () {
+  mounted: function() {
     this.getBook();
   },
 };
@@ -183,33 +183,31 @@ export default {
 /*웹 폰트 불러오기*/
 @font-face {
   font-family: "SCRegular";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: "SCMedium";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: "SCBold";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
-
 .container {
   padding: min(5vw, 20px);
-
-  &>* {
+  & > * {
     margin: auto;
   }
 }
-
 .v-card {
   max-width: 700px;
   min-height: 899px;
@@ -217,12 +215,10 @@ export default {
   font-family: "SCRegular";
   background-color: white;
 }
-
 .v-divider {
   margin-top: min(2.5vw, 10px);
   margin-bottom: min(3vw, 12px);
 }
-
 .v-application p {
   margin-bottom: 0;
 }
