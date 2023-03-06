@@ -29,7 +29,7 @@
 </template>
 
 <script>
-const dates = ["2023-03-10", "2023-03-10"];
+const dates = ["2023-03-09", "2023-03-10"];
 const hours = ["10", "11", "12", "13", "14", "15", "16", "17"];
 const minutes = ["00", "10", "20", "30", "40", "50"];
 export default {
