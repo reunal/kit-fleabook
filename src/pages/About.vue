@@ -22,8 +22,8 @@
             안녕하십니까 벼룩시장 사이트 개발 관리를 맡은
           </h4>
           <h4 class="subheading">
-            컴퓨터소프트웨어공학과 학생회장 황진권, 컴퓨터공학과 학생회장
-            정민수입니다.
+            컴퓨터소프트웨어공학과 학생회장 장선혜, 컴퓨터공학과 학생회장
+            이예림입니다.
           </h4>
           <h4 class="subheading">
             나뉘어 있던 두 개의 과가 협력하여 의미 있는 프로젝트를 해보았습니다.
@@ -34,7 +34,7 @@
           </h4>
           <br />
           <h4 class="subheading">
-            안녕하세요 36대 비트윈 학생복지위원회 위원장 김보혁입니다.
+            안녕하세요 38대 위로 학생복지위원회 위원장 이민호입니다.
           </h4>
           <h4 class="subheading">
             앞으로도 학우분들의 복지를 위해 더 힘쓰는 학생복지위원회가
@@ -53,18 +53,21 @@
     >
       <v-row align="center" justify="center">
         <v-col class="text-center" cols="12">
-          <h1 class="font-weight-black mb-4">2021 Developer</h1>
+          <h1 class="font-weight-black mb-4">2023 Developer</h1>
           <h4 class="subheading">컴퓨터소프트웨어공학과</h4>
-          <h5 class="subheading font-weight-light mt-2">예약 페이지</h5>
-          <h4 class="subheading">16' 김평안 17' 조우성</h4>
+          <h5 class="subheading font-weight-light mt-2">프론트엔드</h5>
+          <h4 class="subheading">18' 모유진</h4>
 
           <h5 class="subheading font-weight-light mt-2">백엔드</h5>
-          <h4 class="subheading">19' 이준재</h4>
+          <h4 class="subheading">22' 안재범</h4>
 
           <h1 class="headline- font-weight-black mb-4">.</h1>
           <h4 class="subheading">컴퓨터공학과</h4>
-          <h5 class="subheading font-weight-light mt-2">관리자 페이지</h5>
-          <h4 class="subheading">16' 김도현 16' 권익주</h4>
+          <h5 class="subheading font-weight-light mt-2">프론트엔드</h5>
+          <h4 class="subheading">20' 이예림</h4>
+          <h5 class="subheading font-weight-light mt-2">백엔드</h5>
+          <h4 class="subheading">22' 김준용</h4>
+          <h4 class="subheading"></h4>
         </v-col>
       </v-row>
     </v-parallax>
@@ -78,10 +81,6 @@
 <script>
 export default {};
 </script>
-
-
-
-
 
 <style lang="scss" scoped>
 .big-title {

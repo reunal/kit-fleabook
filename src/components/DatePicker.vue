@@ -20,8 +20,8 @@
     <v-date-picker
       v-model="date"
       no-title
-      min="2021-08-13"
-      max="2021-09-12"
+      min="2023-03-09"
+      max="2023-03-10"
       @input="setDate()"
     />
   </v-menu>
