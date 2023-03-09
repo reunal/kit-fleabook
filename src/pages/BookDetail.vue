@@ -37,7 +37,7 @@ export default {
     HelpArea,
   },
   //컴포넌트가 사용하는 변수 정의 및 초기화(비동기 사용 불가능)
-  data: function() {
+  data: function () {
     return {
       //책 정보 변수
       bookId: null,
@@ -103,7 +103,7 @@ export default {
   //컴포넌트가 사용하는 메소드 정의
   methods: {
     //api 책 정보 받아오기
-    getBook: function() {
+    getBook: function () {
       this.loading = true;
       this.bookId = this.$route.query.bookId;
       this.rsvInfo.bookId = this.bookId;
@@ -165,15 +165,16 @@ export default {
       }
       //지정된 시간 이전에는 예약 버튼 클릭 불가능하게 막아놓기
       this.todayInfo = new Date();
-      const startDate = new Date(2023, 3, 9, 0, 0, 0);
-
+      const startDate = new Date(2023, 2, 9, 0, 0, 0);
+      console.log("test : ", this.todayInfo);
+      console.log("test : ", startDate);
       if (this.todayInfo < startDate) {
         this.rsvInfo.isRsvDisable = true;
       }
     },
   },
   //DOM을 업데이트 해서 view refresh하는 부분(비동기 사용 가능)
-  mounted: function() {
+  mounted: function () {
     this.getBook();
   },
 };
